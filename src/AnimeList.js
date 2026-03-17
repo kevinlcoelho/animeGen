@@ -14,7 +14,7 @@ function AnimeList() {
       {animes.map((anime) => (
         <div key={anime.mal_id}>
           <h2>{anime.title}</h2>
-          <img src={anime.images.jpg.image_url} width="200" />
+          <img src={anime.images.jpg.image_url} width="200" alt={anime.title} />
           <p>Ano: {anime.year}</p>
           <p>Episódios: {anime.episodes}</p>
           <p>Nota: {anime.score}</p>
@@ -23,5 +23,4 @@ function AnimeList() {
     </div>
   )
 }
-// teste 3
 export default AnimeList
