@@ -23,5 +23,5 @@ function AnimeList() {
     </div>
   )
 }
-// teste 2
+// teste 3
 export default AnimeList
