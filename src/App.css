@@ -20,12 +20,24 @@
 }
 
 .topo-painel {
-  text-align: center;
-  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.controles-topo {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
 }
 
 .topo-painel h1 {
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-size: clamp(3rem, 3vw, 2.5rem);
   margin-bottom: 15px;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -37,12 +49,14 @@
 }
 
 .botao-gerar {
-  min-width: 200px;
+  width: 230px;
+  height: 45px;
+  flex-shrink: 0;
   background: linear-gradient(45deg, #9b00d8, #2f00ff);
   color: white;
   border: none;
-  padding: 10px 25px;
   border-radius: 25px;
+  font-size: 0.95rem;
   font-weight: bold;
   cursor: pointer;
   position: relative;
@@ -50,6 +64,9 @@
   transition:
     transform 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6),
     background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .botao-gerar.loading {
@@ -157,33 +174,125 @@
   margin-top: 15px;
   display: flex;
   justify-content: center;
+  position: relative;
+  min-width: 200px;
 }
 
-.gaveta-generos {
-  background: rgba(42, 0, 70, 0.7);
-  color: white;
+.gaveta-wrapper {
+  position: relative;
+  width: 100%;
+  z-index: 100;
+}
+
+.gaveta-header {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(155, 0, 216, 0.1);
   border: 2px solid #9b00d8;
   padding: 10px 20px;
-  border-radius: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  outline: none;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
-  appearance: none; /* Remove a seta padrão do navegador */
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   text-align: center;
-  min-width: 180px;
-  box-shadow: 0 0 15px rgba(155, 0, 216, 0.2);
 }
 
-.gaveta-generos:hover {
-  border-color: #c156ff;
-  box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+.gaveta-header:hover {
+  border-color: #8400ff;
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
 }
 
-.gaveta-generos option {
-  background-color: #16001f;
+.gaveta-header.ativo {
+  border-color: #8400ff;
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+}
+
+.seta {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.seta-icone.girar {
+  transform: rotate(180deg);
+}
+
+.seta-icone {
+  position: absolute;
+  right: 15px;
+  font-style: normal;
+  font-size: 0.7rem;
+  color: #9b00d8;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.gaveta-lista {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+  background: #070046;
+  border: 2px solid #9b00d8;
+  border-radius: 15px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.gaveta-lista.expandida {
+  max-height: 300px;
+  opacity: 1;
+  transform: translateY(0);
+  overflow-y: auto;
+  padding: 10px 0;
+}
+
+.gaveta-lista li {
+  padding: 12px 20px;
   color: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+.gaveta-lista li:hover {
+  background: rgba(155, 0, 216, 0.3);
+  color: #00f7ff;
+  padding-left: 20%;
+}
+
+.gaveta-lista::-webkit-scrollbar {
+  width: 6px;
+}
+
+.gaveta-lista::-webkit-scrollbar-track {
+  background: rgba(7, 0, 70, 0.5);
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.gaveta-lista::-webkit-scrollbar-thumb {
+  background: #9b00d8;
+  border-radius: 10px;
+  border: 1px solid #1a0033;
+}
+
+.texto-genero-atual {
+  margin: 0;
+  flex: 1;
+  text-align: center;
+  color: #ffffff !important;
+  font-weight: bold;
+  padding: 0;
 }
 
 @keyframes skeletonShimmer {

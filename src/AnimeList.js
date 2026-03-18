@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 const tradutorGeneros = {
   Action: 'Ação',
@@ -23,6 +23,26 @@ function AnimeList() {
   const [animes, setAnimes] = useState([])
   const [loading, setLoading] = useState(false)
   const [generoSelecionado, setGeneroSelecionado] = useState('')
+  const [aberto, setAberto] = useState(false)
+  const gavetaRef = useRef(null)
+
+  useEffect(() => {
+    function manipularCliqueFora(event) {
+      if (
+        aberto &&
+        gavetaRef.current &&
+        !gavetaRef.current.contains(event.target)
+      ) {
+        setAberto(false)
+      }
+    }
+
+    document.addEventListener('mousedown', manipularCliqueFora)
+
+    return () => {
+      document.removeEventListener('mousedown', manipularCliqueFora)
+    }
+  }, [aberto])
 
   function embaralhar(array) {
     const novoArray = [...array]
@@ -34,6 +54,11 @@ function AnimeList() {
   }
 
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+  const selecionarGenero = (nome) => {
+    setGeneroSelecionado(nome)
+    setAberto(false)
+  }
 
   const GENERO_IDS = {
     Ação: 1,
@@ -67,7 +92,7 @@ function AnimeList() {
     try {
       const paginasAlvo = new Set()
       while (paginasAlvo.size < 5) {
-        paginasAlvo.add(Math.floor(Math.random() * 40) + 1)
+        paginasAlvo.add(Math.floor(Math.random() * 10) + 1)
       }
 
       for (const page of paginasAlvo) {
@@ -126,19 +151,31 @@ function AnimeList() {
               'Gerar novos animes'
             )}
           </button>
-          <div className="seletor-container">
-            <select
-              className="gaveta-generos"
-              value={generoSelecionado}
-              onChange={(e) => setGeneroSelecionado(e.target.value)}
-            >
-              <option value="">Todos os Gêneros</option>
-              {Object.keys(GENERO_IDS).map((nomeGenero) => (
-                <option key={nomeGenero} value={nomeGenero}>
-                  {nomeGenero}
-                </option>
-              ))}
-            </select>
+          <div className="seletor-container" ref={gavetaRef}>
+            <div className="gaveta-wrapper">
+              <div
+                className={`gaveta-header ${aberto ? 'ativo' : ''}`}
+                onClick={() => setAberto(!aberto)}
+              >
+                <p className="texto-genero-atual">
+                  {generoSelecionado || 'Todos os Gêneros'}
+                </p>
+
+                <i className={`seta-icone ${aberto ? 'girar' : ''}`}>▼</i>
+              </div>
+
+              <ul className={`gaveta-lista ${aberto ? 'expandida' : ''}`}>
+                <li onClick={() => selecionarGenero('')}>Todos os Gêneros</li>
+                {Object.keys(GENERO_IDS).map((nomeGenero) => (
+                  <li
+                    key={nomeGenero}
+                    onClick={() => selecionarGenero(nomeGenero)}
+                  >
+                    {nomeGenero}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -249,6 +286,20 @@ function AnimeList() {
                   </a>
                 )}
               </p>
+              {/* <p>
+                <span>Assistir</span>:{' '}
+                {loading ? (
+                  <div className="skeleton-loading skeleton-data skeleton-w-link"></div>
+                ) : (
+                  <a
+                    href={`https://www.crunchyroll.com/pt-br/search?q=${anime.title}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Ouvir
+                  </a>
+                )}
+              </p> */}
               <hr />
             </div>
           ))}

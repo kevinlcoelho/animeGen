@@ -7,37 +7,119 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Web site criado para indicar animes com efeitos de skeleton loading"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <title>Anime Indicator</title>
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>Anime indicator</title>
+    <style>
+      /* Isso garante que o fundo escuro apareça imediatamente */
+      body {
+        background-color: #16001f;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .skeleton-wrapper {
+        width: 100%;
+        max-width: 1200px;
+        padding: 20px;
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+      }
+      /* Reaproveitando a lógica do shimmer que você já tem no CSS */
+      @keyframes shimmer {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
+      .skel-card {
+        flex: 1;
+        min-width: 200px;
+        height: 350px;
+        background: #070046;
+        border-radius: 10px;
+        padding: 10px;
+      }
+      .skel-img {
+        width: 100%;
+        aspect-ratio: 2/3;
+        background: linear-gradient(
+          90deg,
+          #070046 25%,
+          #1a0066 50%,
+          #070046 75%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite linear;
+        border-radius: 6px;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <div id="root">
+      <div class="pagina-centralizada">
+        <div class="painel-principal">
+          <div class="topo-painel">
+            <h1 style="opacity: 0.3">Carregando...</h1>
+          </div>
+          <div class="containerAnime">
+            <div class="cardAnime">
+              <div class="skeleton-loading skeleton-img-placeholder"></div>
+              <div
+                class="skeleton-loading skeleton-title-en"
+                style="height: 20px; width: 80%; margin: 10px auto"
+              ></div>
+              <div
+                class="skeleton-loading skeleton-title-jp"
+                style="height: 12px; width: 50%; margin: 5px auto"
+              ></div>
+            </div>
+            <div class="cardAnime">
+              <div class="skeleton-loading skeleton-img-placeholder"></div>
+              <div
+                class="skeleton-loading skeleton-title-en"
+                style="height: 20px; width: 80%; margin: 10px auto"
+              ></div>
+              <div
+                class="skeleton-loading skeleton-title-jp"
+                style="height: 12px; width: 50%; margin: 5px auto"
+              ></div>
+            </div>
+            <div class="cardAnime">
+              <div class="skeleton-loading skeleton-img-placeholder"></div>
+              <div
+                class="skeleton-loading skeleton-title-en"
+                style="height: 20px; width: 80%; margin: 10px auto"
+              ></div>
+              <div
+                class="skeleton-loading skeleton-title-jp"
+                style="height: 12px; width: 50%; margin: 5px auto"
+              ></div>
+            </div>
+            <div class="cardAnime">
+              <div class="skeleton-loading skeleton-img-placeholder"></div>
+              <div
+                class="skeleton-loading skeleton-title-en"
+                style="height: 20px; width: 80%; margin: 10px auto"
+              ></div>
+              <div
+                class="skeleton-loading skeleton-title-jp"
+                style="height: 12px; width: 50%; margin: 5px auto"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
