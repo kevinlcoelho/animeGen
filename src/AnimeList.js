@@ -16,7 +16,7 @@ const tradutorGeneros = {
   Suspense: 'Suspense',
   'Award Winning': 'Premiados',
   Gourmet: 'Culinária',
-  Ecchi: 'Echi',
+  Ecchi: 'Ecchi',
   'Avant Garde': 'Experimental',
   'Boys Love': 'Boys Love',
   'Girls Love': 'Girls Love',
@@ -86,36 +86,103 @@ function AnimeList() {
   }, [])
 
   return (
-    <div>
-      <button onClick={pegarAleatorios} disabled={loading}>
-        {loading ? 'Carregando...' : 'Gerar novos animes'}
-      </button>
+    <div className="pagina-centralizada">
+      <div className="painel-principal">
+        <div className="topo-painel">
+          <h1>Anime Indicator</h1>
+          <button
+            onClick={pegarAleatorios}
+            disabled={loading}
+            className="botao-gerar"
+          >
+            {loading ? 'Carregando...' : 'Gerar novos animes'}
+          </button>
+        </div>
 
-      <div>
-        {animes.map((anime) => (
-          <div key={anime.mal_id}>
-            <h3>{anime.title}</h3>
+        <div className="containerAnime">
+          {animes.map((anime) => (
+            <div key={anime.mal_id} className="cardAnime">
+              <h3>
+                <span className="titulo-en">{anime.title}</span>
+                {anime.title_japanese && (
+                  <span className="titulo-jp">{anime.title_japanese}</span>
+                )}
+              </h3>
 
-            <img
-              src={anime.images?.jpg?.image_url}
-              alt={anime.title}
-              width="200"
-            />
+              <img
+                src={anime.images?.jpg?.image_url}
+                alt={anime.title}
+                width="200"
+              />
+              <p>
+                📅<span>Ano</span>: {anime.year || 'N/A'}
+              </p>
+              <p>
+                🎞️<span>Episódios</span>: {anime.episodes || '?'}
+              </p>
+              <p>
+                ⭐<span>Rank</span>: {anime.score || 'Sem nota'}
+              </p>
 
-            <p>Ano: {anime.year || 'N/A'}</p>
-            <p>Episodios: {anime.episodes || '?'}</p>
-            <p>Nota: {anime.score || 'Sem nota'}</p>
+              <p>
+                🎭<span>Genêro</span>:{' '}
+                {anime.genres
+                  ?.map((g) => tradutorGeneros[g.name] || g.name)
+                  .join(', ') || 'N/A'}
+              </p>
 
-            <p>
-              Generos:{' '}
-              {anime.genres
-                ?.map((g) => tradutorGeneros[g.name] || g.name)
-                .join(', ') || 'N/A'}
-            </p>
-
-            <hr />
-          </div>
-        ))}
+              <p>
+                🎥<span>Trailer</span>:{' '}
+                {anime.trailer?.url ? (
+                  <a href={anime.trailer.url} target="_blank" rel="noreferrer">
+                    ▶️ Assistir Trailer
+                  </a>
+                ) : (
+                  <a
+                    href={`https://www.google.com/search?q=${anime.title}+trailer-original+youtube&btnI`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Assistir
+                  </a>
+                )}
+              </p>
+              <p>
+                🎶<span>Opening</span>:{' '}
+                {anime.trailer?.url ? (
+                  <a href={anime.trailer.url} target="_blank" rel="noreferrer">
+                    ▶️ Assistir Opening
+                  </a>
+                ) : (
+                  <a
+                    href={`https://www.google.com/search?q=${anime.title}+opening-original+youtube&btnI`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Ouvir
+                  </a>
+                )}
+              </p>
+              <p>
+                🎵<span>Ending</span>:{' '}
+                {anime.trailer?.url ? (
+                  <a href={anime.trailer.url} target="_blank" rel="noreferrer">
+                    ▶️ Assistir Ending
+                  </a>
+                ) : (
+                  <a
+                    href={`https://www.google.com/search?q=${anime.title}+ending-original+youtube&btnI`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Ouvir
+                  </a>
+                )}
+              </p>
+              <hr />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
