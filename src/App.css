@@ -329,17 +329,6 @@
   }
 
   .containerAnime {
-    grid-template-columns: repeat(4, 1fr);
-    row-gap: 35px;
-  }
-}
-
-@media (max-width: 896px) {
-  .painel-principal {
-    padding: 50px 16px 24px 16px;
-  }
-
-  .containerAnime {
     grid-template-columns: repeat(3, 1fr);
     row-gap: 35px;
   }
