@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 const tradutorGeneros = {
   Action: 'Ação',
@@ -184,29 +184,57 @@ function AnimeList() {
         </div>
 
         <div className="containerAnime">
-          {(loading && animes.length === 0 ? Array(6).fill({}) : animes).map(
-            (anime, index) => (
-              <div key={anime.mal_id || index} className="cardAnime">
-                <h3>
-                  {loading ? (
-                    <>
+          {(loading ? Array(6).fill(null) : animes).map((anime, index) => (
+            <div
+              key={anime?.mal_id || `skeleton-${index}`}
+              className="cardAnime"
+            >
+              {loading ? (
+                <>
+                  <h3>
+                    <div className="skeleton-title-wrapper">
                       <div className="skeleton-loading skeleton-title-en"></div>
                       <div className="skeleton-loading skeleton-title-jp"></div>
-                    </>
-                  ) : (
-                    <>
-                      <span className="titulo-en">{anime.title}</span>
-                      {anime.title_japanese && (
-                        <span className="titulo-jp">
-                          {anime.title_japanese}
-                        </span>
-                      )}
-                    </>
-                  )}
-                </h3>
-                {loading ? (
+                    </div>
+                  </h3>
                   <div className="skeleton-loading skeleton-img-placeholder"></div>
-                ) : (
+                  <p>
+                    📅<span>Ano</span>:
+                    <div className="skeleton-loading skeleton-data skeleton-w-ano"></div>
+                  </p>
+                  <p>
+                    🎞️<span>Episódios</span>:
+                    <div className="skeleton-loading skeleton-data skeleton-w-episodios"></div>
+                  </p>
+                  <p>
+                    ⭐<span>Rank</span>:
+                    <div className="skeleton-loading skeleton-data skeleton-w-rank"></div>
+                  </p>
+                  <p>
+                    🎭<span>Gênero</span>:
+                    <div className="skeleton-loading skeleton-data skeleton-w-genero"></div>
+                  </p>
+                  <p>
+                    🎥<span>Trailer</span>:
+                    <div className="skeleton-loading skeleton-data skeleton-w-link"></div>
+                  </p>
+                  <p>
+                    🎶<span>Opening</span>:
+                    <div className="skeleton-loading skeleton-data skeleton-w-link"></div>
+                  </p>
+                  <p>
+                    🎵<span>Ending</span>:
+                    <div className="skeleton-loading skeleton-data skeleton-w-link"></div>
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h3>
+                    <span className="titulo-en">{anime.title}</span>
+                    {anime.title_japanese && (
+                      <span className="titulo-jp">{anime.title_japanese}</span>
+                    )}
+                  </h3>
                   <a
                     href={`https://www.google.com/search?q=${anime.title}+official-trailer-${anime.year}+youtube&btnI`}
                     target="_blank"
@@ -214,56 +242,29 @@ function AnimeList() {
                     draggable="false"
                   >
                     <img
+                      className="skeleton-img-placeholder"
                       src={anime.images?.jpg?.image_url}
                       alt={anime.title}
-                      width="200"
                       draggable="false"
                     />
                   </a>
-                )}
-                <p>
-                  📅<span>Ano</span>:
-                  {loading ? (
-                    <div className="skeleton-loading skeleton-data skeleton-w-ano"></div>
-                  ) : (
-                    ` ${anime.year || 'N/A'}`
-                  )}
-                </p>
-                <p>
-                  🎞️<span>Episódios</span>:
-                  {loading ? (
-                    <div className="skeleton-loading skeleton-data skeleton-w-episodios"></div>
-                  ) : (
-                    ` ${anime.episodes || '?'}`
-                  )}
-                </p>
-                <p>
-                  ⭐<span>Rank</span>:{' '}
-                  {loading ? (
-                    <div className="skeleton-loading skeleton-data skeleton-w-rank"></div>
-                  ) : (
-                    ` ${anime.score || 'Sem nota'}`
-                  )}
-                </p>
-
-                <p>
-                  🎭<span>Genêro</span>:{' '}
-                  {loading ? (
-                    <div className="skeleton-loading skeleton-data skeleton-w-genero"></div>
-                  ) : (
-                    ` ${
-                      anime.genres
-                        ?.map((g) => tradutorGeneros[g.name] || g.name)
-                        .join(', ') || 'N/A'
-                    }`
-                  )}
-                </p>
-
-                <p>
-                  🎥<span>Trailer</span>:{' '}
-                  {loading ? (
-                    <div className="skeleton-loading skeleton-data skeleton-w-link"></div>
-                  ) : (
+                  <p>
+                    📅<span>Ano</span>: {anime.year || 'Não informado'}
+                  </p>
+                  <p>
+                    🎞️<span>Episódios</span>: {anime.episodes || '?'}
+                  </p>
+                  <p>
+                    ⭐<span>Rank</span>: {anime.score || 'Sem nota'}
+                  </p>
+                  <p>
+                    🎭<span>Gênero</span>:{' '}
+                    {anime.genres
+                      ?.map((g) => tradutorGeneros[g.name] || g.name)
+                      .join(', ') || 'N/A'}
+                  </p>
+                  <p>
+                    🎥<span>Trailer</span>:
                     <a
                       href={`https://www.google.com/search?q=${anime.title}+official-trailer-${anime.year}+youtube&btnI`}
                       target="_blank"
@@ -271,13 +272,9 @@ function AnimeList() {
                     >
                       Assistir
                     </a>
-                  )}
-                </p>
-                <p>
-                  🎶<span>Opening</span>:{' '}
-                  {loading ? (
-                    <div className="skeleton-loading skeleton-data skeleton-w-link"></div>
-                  ) : (
+                  </p>
+                  <p>
+                    🎶<span>Opening</span>:
                     <a
                       href={`https://www.google.com/search?q=${anime.title}+opening+tv+size+${anime.year}+youtube&btnI`}
                       target="_blank"
@@ -285,13 +282,9 @@ function AnimeList() {
                     >
                       Ouvir
                     </a>
-                  )}
-                </p>
-                <p>
-                  🎵<span>Ending</span>:{' '}
-                  {loading ? (
-                    <div className="skeleton-loading skeleton-data skeleton-w-link"></div>
-                  ) : (
+                  </p>
+                  <p>
+                    🎵<span>Ending</span>:
                     <a
                       href={`https://www.google.com/search?q=${anime.title}+ending+tv+size+${anime.year}+youtube&btnI`}
                       target="_blank"
@@ -299,12 +292,11 @@ function AnimeList() {
                     >
                       Ouvir
                     </a>
-                  )}
-                </p>
-                <hr />
-              </div>
-            ),
-          )}
+                  </p>
+                </>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </div>

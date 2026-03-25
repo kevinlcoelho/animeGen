@@ -12,12 +12,14 @@
 .painel-principal {
   position: relative;
   background: linear-gradient(#070046, #2a0046);
-  padding: 30px 20px;
-  border-radius: 20px;
+  padding: 24px 16px;
+  border-radius: 16px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
   width: 100%;
-  max-width: 60%;
+  max-width: 1200px;
+  margin: 0 auto;
   color: white;
+  box-sizing: border-box;
 }
 
 .topo-painel {
@@ -38,7 +40,7 @@
 }
 
 .topo-painel h1 {
-  font-size: clamp(3rem, 3vw, 2.5rem);
+  font-size: clamp(2.4rem, 2.5vw, 2rem);
   margin-top: 1%;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -51,6 +53,7 @@
   user-select: none;
   -webkit-user-select: none;
   cursor: default;
+  text-align: center;
 }
 
 .assinatura {
@@ -91,7 +94,7 @@
   background: linear-gradient(45deg, #9b00d8, #2f00ff);
   color: white;
   border: none;
-  border-radius: 25px;
+  border-radius: 20px;
   font-size: 0.95rem;
   font-weight: bold;
   cursor: pointer;
@@ -112,15 +115,6 @@
 
 .botao-gerar.loading::before {
   animation: brilhoPassando 1200ms linear infinite;
-}
-
-@keyframes brilhoPassando {
-  0% {
-    left: -100%;
-  }
-  100% {
-    left: 100%;
-  }
 }
 
 .botao-gerar::before {
@@ -180,34 +174,29 @@
   animation-delay: -0.9s;
 }
 
-@keyframes wave {
-  0%,
-  60%,
-  100% {
-    transform: translateY(0);
-    opacity: 0.6;
-  }
-  30% {
-    transform: translateY(-6px);
-    opacity: 1;
-  }
-}
-
 .containerAnime {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: stretch;
-  gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
   width: 100%;
   padding: 10px 5px;
   box-sizing: border-box;
-  overflow-x: auto;
-  overflow: visible;
+}
+
+@media (max-width: 1024px) {
+  .containerAnime {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .containerAnime {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .seletor-container {
-  margin-top: 15px;
+  margin-top: 12px;
   display: flex;
   justify-content: center;
   position: relative;
@@ -291,7 +280,7 @@
 }
 
 .gaveta-lista li {
-  padding: 12px 20px;
+  padding: 10px 16px;
   color: white;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -333,15 +322,6 @@
   user-select: none;
 }
 
-@keyframes skeletonShimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
 .skeleton-loading {
   background: linear-gradient(90deg, #070046 25%, #1a0066 50%, #070046 75%);
   background-size: 200% 100%;
@@ -351,73 +331,85 @@
   display: inline-block;
 }
 
+.skeleton-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding: 8px;
+}
+
 .skeleton-img-placeholder {
   width: 100%;
-  aspect-ratio: 2/3;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
   border-radius: 6px;
+  margin: 0 auto 10px auto;
   display: block;
-  margin-top: 4px;
-  margin-bottom: 10px;
+}
+
+.skeleton-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 6px;
+  min-height: 52px;
+  justify-content: center;
 }
 
 .skeleton-title-en {
   width: 90%;
-  height: 1.2rem;
-  margin: 5px auto;
+  height: 16px;
+  align-self: center;
+  border-radius: 4px;
 }
 
 .skeleton-title-jp {
   width: 60%;
-  height: 0.8rem;
-  margin: 5px auto;
+  height: 11px;
+  align-self: center;
+  border-radius: 4px;
 }
 
 .skeleton-data {
-  display: inline-block;
-  flex: 1;
-  height: 0.8rem;
-  margin-left: 10px;
-  max-width: 100px;
+  height: 11px;
+  border-radius: 4px;
+  display: block;
 }
 
 .skeleton-w-ano {
-  width: 40px;
-}
-.skeleton-w-episodios {
-  width: 30px;
-}
-.skeleton-w-rank {
-  width: 35px;
-}
-.skeleton-w-genero {
   width: 80px;
 }
+
+.skeleton-w-episodios {
+  width: 80px;
+}
+
+.skeleton-w-rank {
+  width: 80px;
+}
+
+.skeleton-w-genero {
+  width: 140px;
+}
+
 .skeleton-w-link {
-  width: 50px;
+  width: 60px;
 }
 
 .cardAnime {
-  flex: 1;
   background: linear-gradient(#0084ff1c, #2700921c);
-  padding: 10px;
+  padding: 8px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  transition: background 0.3s;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s ease;
-}
-
-@keyframes brilhoPassandoDiagonal {
-  0% {
-    top: -150%;
-    left: -150%;
-  }
-  100% {
-    top: 100%;
-    left: 100%;
-  }
+  transition:
+    transform 0.3s ease,
+    background 0.3s;
+  height: 100%;
+  min-width: 0;
 }
 
 .cardAnime::before {
@@ -455,13 +447,17 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 65px;
+  align-items: center;
+  height: 52px;
   margin: 0 0 10px 0;
   text-align: center;
+  margin-bottom: 6px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .titulo-en {
-  font-size: clamp(0.7rem, 1vw, 0.9rem);
+  font-size: clamp(0.6rem, 0.85vw, 0.75rem);
   font-weight: bold;
   line-height: 1.2;
   display: -webkit-box;
@@ -472,6 +468,7 @@
 }
 
 .titulo-jp {
+  width: 100%;
   font-size: clamp(0.55rem, 0.7vw, 0.75rem);
   opacity: 0.4;
   margin-top: 3px;
@@ -479,6 +476,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: center;
 }
 
 .cardAnime img {
@@ -494,13 +492,14 @@
 
 .cardAnime p {
   font-size: clamp(0.6rem, 0.75vw, 0.8rem);
-  margin: 2px 0;
+  line-height: 1.2;
+  margin: 0px;
   color: #bbb;
+  display: flex;
+  align-items: center;
+  height: 1.2rem;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: left;
-  display: block;
 }
 
 .cardAnime a {
@@ -519,19 +518,51 @@
   display: none;
 }
 
-@media (max-width: 768px) {
-  .containerAnime {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .cardAnime {
-    flex: 0 0 45%;
-  }
-}
-
 .cardAnime p span {
   color: #00d2ff;
   font-weight: 700;
   margin-right: 1px;
   text-shadow: 0 0 5px rgba(0, 210, 255, 0.3);
+}
+
+@keyframes brilhoPassandoDiagonal {
+  0% {
+    top: -150%;
+    left: -150%;
+  }
+  100% {
+    top: 100%;
+    left: 100%;
+  }
+}
+
+@keyframes brilhoPassando {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes skeletonShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes wave {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  30% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
 }
