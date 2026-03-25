@@ -152,6 +152,25 @@
   pointer-events: none;
 }
 
+@media (max-width: 768px) {
+  .assinatura {
+    position: static;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+
+  .assinatura .by {
+    font-size: 0.5rem;
+  }
+
+  .assinatura .nome {
+    font-size: 0.75rem;
+  }
+}
+
 .assinatura .by {
   font-size: 0.6rem;
   text-transform: uppercase;
