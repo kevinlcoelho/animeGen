@@ -1,9 +1,62 @@
+/* ========================================
+   PALETA DE CORES FIXA
+   ======================================== */
+:root {
+  /* Roxos */
+  --roxo-escuro: #070046;
+  --roxo-medio: #2a0046;
+  --roxo-claro: #1a0066;
+  --roxo-vibrante: #9b00d8;
+  --roxo-intenso: #8400ff;
+
+  /* Azuis */
+  --azul-escuro: #2f00ff;
+  --azul-medio: #0084ff;
+  --azul-claro: #00d2ff;
+  --azul-ciano: #00f7ff;
+
+  /* Fundo */
+  --fundo-principal: #16001f;
+  --fundo-card: rgba(0, 132, 255, 0.11);
+  --fundo-card-hover: rgba(0, 132, 255, 0.31);
+
+  /* Texto */
+  --texto-claro: #ffffff;
+  --texto-medio: #bbbbbb;
+  --texto-suave: rgba(255, 255, 255, 0.4);
+
+  /* Links e destaques */
+  --link: #bf5eff;
+  --link-hover: #d99fff;
+  --destaque: #00d2ff;
+
+  /* Gradientes */
+  --gradiente-titulo: linear-gradient(45deg, #9b00d8, #2f00ff);
+  --gradiente-botao: linear-gradient(45deg, #9b00d8, #2f00ff);
+  --gradiente-botao-hover: linear-gradient(45deg, #8600bb, #2000b1);
+  --gradiente-painel: linear-gradient(#070046, #2a0046);
+  --gradiente-assinatura: linear-gradient(45deg, #00d2ff, #9b00d8);
+  --gradiente-card: linear-gradient(
+    rgba(0, 132, 255, 0.11),
+    rgba(39, 0, 146, 0.11)
+  );
+  --gradiente-card-hover: linear-gradient(
+    rgba(0, 132, 255, 0.31),
+    rgba(101, 0, 168, 0.31)
+  );
+
+  /* Sombras e efeitos */
+  --sombra-card: 0 15px 35px rgba(0, 0, 0, 0.5);
+  --sombra-glow: 0 0 15px rgba(0, 210, 255, 0.3);
+  --sombra-texto: 0 0 5px rgba(0, 210, 255, 0.3);
+}
+
 .pagina-centralizada {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #16001f;
+  background-color: var(--fundo-principal);
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   padding: 10px;
   margin: 0;
@@ -11,14 +64,14 @@
 
 .painel-principal {
   position: relative;
-  background: linear-gradient(#070046, #2a0046);
+  background: var(--gradiente-painel);
   padding: 24px 16px;
   border-radius: 16px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--sombra-card);
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  color: white;
+  color: var(--texto-claro);
   box-sizing: border-box;
 }
 
@@ -44,7 +97,7 @@
   margin-top: 1%;
   text-transform: uppercase;
   letter-spacing: 2px;
-  background: linear-gradient(45deg, #9b00d8, #2f00ff);
+  background: var(--gradiente-titulo);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -71,7 +124,7 @@
   font-size: 0.6rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--texto-suave);
   margin-bottom: 2px;
 }
 
@@ -79,7 +132,7 @@
   font-size: 0.9rem;
   font-weight: 800;
   letter-spacing: 1px;
-  background: linear-gradient(45deg, #00d2ff, #9b00d8);
+  background: var(--gradiente-assinatura);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -91,8 +144,8 @@
   width: 230px;
   height: 45px;
   flex-shrink: 0;
-  background: linear-gradient(45deg, #9b00d8, #2f00ff);
-  color: white;
+  background: var(--gradiente-botao);
+  color: var(--texto-claro);
   border: none;
   border-radius: 20px;
   font-size: 0.95rem;
@@ -110,7 +163,7 @@
 
 .botao-gerar.loading {
   transform: scale(0.95);
-  background: linear-gradient(45deg, #8600bb, #2000b1);
+  background: var(--gradiente-botao-hover);
 }
 
 .botao-gerar.loading::before {
@@ -145,7 +198,7 @@
 }
 
 .botao-gerar:disabled {
-  background: linear-gradient(45deg, #8600bb, #2000b1);
+  background: var(--gradiente-botao-hover);
   cursor: not-allowed;
 }
 
@@ -213,7 +266,7 @@
   width: 100%;
   box-sizing: border-box;
   background: rgba(155, 0, 216, 0.1);
-  border: 2px solid #9b00d8;
+  border: 2px solid var(--roxo-vibrante);
   padding: 10px 20px;
   border-radius: 25px;
   display: flex;
@@ -224,13 +277,13 @@
 }
 
 .gaveta-header:hover {
-  border-color: #8400ff;
-  box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+  border-color: var(--roxo-intenso);
+  box-shadow: var(--sombra-glow);
 }
 
 .gaveta-header.ativo {
-  border-color: #8400ff;
-  box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+  border-color: var(--roxo-intenso);
+  box-shadow: var(--sombra-glow);
 }
 
 .seta {
@@ -247,7 +300,7 @@
   right: 15px;
   font-style: normal;
   font-size: 0.7rem;
-  color: #9b00d8;
+  color: var(--roxo-vibrante);
   transition: transform 0.3s ease;
   display: inline-block;
 }
@@ -257,8 +310,8 @@
   top: 110%;
   left: 0;
   width: 100%;
-  background: #070046;
-  border: 2px solid #9b00d8;
+  background: var(--roxo-escuro);
+  border: 2px solid var(--roxo-vibrante);
   border-radius: 15px;
   list-style: none;
   padding: 0;
@@ -292,7 +345,7 @@
 
 .gaveta-lista li:hover {
   background: rgba(155, 0, 216, 0.3);
-  color: #00f7ff;
+  color: var(--azul-ciano);
   padding-left: 20%;
 }
 
@@ -307,7 +360,7 @@
 }
 
 .gaveta-lista::-webkit-scrollbar-thumb {
-  background: #9b00d8;
+  background: var(--roxo-vibrante);
   border-radius: 10px;
   border: 1px solid #1a0033;
 }
@@ -316,7 +369,7 @@
   margin: 0;
   flex: 1;
   text-align: center;
-  color: #ffffff !important;
+  color: var(--texto-claro) !important;
   font-weight: bold;
   padding: 0;
   user-select: none;
@@ -398,7 +451,7 @@
 }
 
 .cardAnime {
-  background: linear-gradient(#0084ff1c, #2700921c);
+  background: var(--gradiente-card);
   padding: 8px;
   border-radius: 10px;
   display: flex;
@@ -437,7 +490,7 @@
 }
 
 .cardAnime:hover {
-  background: linear-gradient(#0084ff50, #6500a850);
+  background: var(--gradiente-card-hover);
   transform: scale(1.05);
   z-index: 10;
   position: relative;
@@ -494,7 +547,7 @@
   font-size: clamp(0.6rem, 0.75vw, 0.8rem);
   line-height: 1.2;
   margin: 0px;
-  color: #bbb;
+  color: var(--texto-medio);
   display: flex;
   align-items: center;
   height: 1.2rem;
@@ -503,14 +556,14 @@
 }
 
 .cardAnime a {
-  color: #bf5eff;
+  color: var(--link);
   text-decoration: none;
   font-weight: bold;
   font-size: clamp(0.6rem, 0.75vw, 0.8rem);
 }
 
 .cardAnime a:hover {
-  color: #d99fff;
+  color: var(--link-hover);
   text-decoration: underline;
 }
 
@@ -519,10 +572,10 @@
 }
 
 .cardAnime p span {
-  color: #00d2ff;
+  color: var(--destaque);
   font-weight: 700;
   margin-right: 1px;
-  text-shadow: 0 0 5px rgba(0, 210, 255, 0.3);
+  text-shadow: var(--sombra-texto);
 }
 
 @keyframes brilhoPassandoDiagonal {
