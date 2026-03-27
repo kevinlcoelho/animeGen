@@ -86,13 +86,13 @@ function AnimeList() {
     const todasAsPaginas = []
     const idGenero = generoSelecionado ? generoIDS[generoSelecionado] : ''
     const baseUrl = idGenero
-      ? `https://api.jikan.moe/v4/anime?genres=${idGenero}&order_by=score&sort=desc`
+      ? `https://api.jikan.moe/v4/anime?genres=${idGenero}&order_by=score&sort=desc&type=tv`
       : `https://api.jikan.moe/v4/top/anime?type=tv`
 
     try {
       const paginasAlvo = new Set()
       while (paginasAlvo.size < 5) {
-        paginasAlvo.add(Math.floor(Math.random() * 40) + 1)
+        paginasAlvo.add(Math.floor(Math.random() * 5) + 1)
       }
 
       for (const page of paginasAlvo) {
