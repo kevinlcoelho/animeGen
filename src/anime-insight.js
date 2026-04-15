@@ -58,10 +58,7 @@ function AnimeList() {
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
   const selecionarGenero = (nome) => {
-    const inverso = Object.fromEntries(
-      Object.entries(tradutorGeneros).map(([en, pt]) => [pt, en]),
-    )
-    setGeneroSelecionado(nome === '' ? '' : inverso[nome] || nome)
+    setGeneroSelecionado(nome)
     setAberto(false)
   }
 
@@ -76,10 +73,17 @@ function AnimeList() {
       }
 
       for (const page of paginasAlvo) {
+        const tradutorInverso = Object.fromEntries(
+          Object.entries(tradutorGeneros).map(([en, pt]) => [pt, en]),
+        )
+        const generoEN = generoSelecionado
+          ? tradutorInverso[generoSelecionado] || generoSelecionado
+          : ''
+
         const query = `
           query {
             Page(page: ${page}, perPage: 25) {
-              media(type: ANIME, format: TV, sort: SCORE_DESC${generoSelecionado ? `, genre_in: ["${generoSelecionado}"]` : ''}) {
+              media(type: ANIME, format: TV, sort: SCORE_DESC${generoEN ? `, genre_in: ["${generoEN}"]` : ''}) {
                 id
                 title { romaji native }
                 coverImage { large }
